@@ -29,7 +29,7 @@ const styles: any = stylesImport;
 import * as checkStylesImport from './DetailsRowCheck.scss';
 const checkStyles: any = checkStylesImport;
 
-export interface IDetailsRowProps extends React.Props<DetailsRow> {
+export interface IDetailsRowProps extends React.HTMLAttributes<HTMLDivElement> {
   componentRef?: () => void;
   item: any;
   itemIndex: number;
@@ -51,7 +51,6 @@ export interface IDetailsRowProps extends React.Props<DetailsRow> {
   getRowAriaLabel?: (item: any) => string;
   checkButtonAriaLabel?: string;
   checkboxCellClassName?: string;
-  className?: string;
 }
 
 export interface IDetailsRowSelectionState {
@@ -191,6 +190,7 @@ export class DetailsRow extends BaseComponent<IDetailsRowProps, IDetailsRowState
       checkboxCellClassName,
       selection,
     } = this.props;
+
     const { columnMeasureInfo, isDropping, groupNestingDepth } = this.state;
     const { isSelected = false, isSelectionModal = false } = this.state.selectionState as IDetailsRowSelectionState;
     const isDraggable = Boolean(dragDropEvents && dragDropEvents.canDrag && dragDropEvents.canDrag(item));
@@ -202,7 +202,7 @@ export class DetailsRow extends BaseComponent<IDetailsRowProps, IDetailsRowState
 
     return (
       <FocusZone
-        {...getNativeProps(this.props, divProperties) }
+        { ...getNativeProps(this.props, divProperties) }
         direction={ FocusZoneDirection.horizontal }
         ref={ this._onRootRef }
         componentRef={ this._resolveRef('_focusZone') }
