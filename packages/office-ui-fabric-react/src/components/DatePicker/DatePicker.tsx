@@ -463,12 +463,14 @@ export class DatePicker extends BaseComponent<IDatePickerProps, IDatePickerState
 
             // Reset invalid input field, if formatting is available
             if (formatDate) {
-              date = this.state.selectedDate;
-              this.setState({
-                formattedDate: formatDate(date!).toString()
-              });
+              if (this.state.selectedDate) {
+                date = this.state.selectedDate;
+                this.setState({
+                  formattedDate: formatDate(date!).toString()
+                });
+              }
             }
-
+            
             this.setState({
               errorMessage: strings!.invalidInputErrorMessage || '*'
             });
